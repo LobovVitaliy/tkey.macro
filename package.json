@@ -1,0 +1,26 @@
+{
+  "name": "tkey.macro",
+  "version": "1.0.0",
+  "description": "Helper macro for i18next-parser package",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "babel-plugin-macros": "^3.1.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LobovVitaliy/tkey.macro.git"
+  },
+  "keywords": [
+    "macro",
+    "i18next-parser"
+  ],
+  "author": "Vitalii Lobov",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/LobovVitaliy/tkey.macro/issues"
+  },
+  "homepage": "https://github.com/LobovVitaliy/tkey.macro#readme"
+}
