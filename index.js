@@ -9,29 +9,29 @@ function tkey({ references, babel }) {
       throw new MacroError('argument 1 required');
     }
 
-    if (!path2) {
-      throw new MacroError('argument 2 required');
-    }
-
     if (path1.node.type !== 'StringLiteral') {
       throw new MacroError('argument 1 must be StringLiteral');
     }
 
-    if (path2.node.type !== 'ObjectExpression') {
-      throw new MacroError('argument 2 must be ObjectExpression');
+    if (path2) {
+      if (path2.node.type !== 'ObjectExpression') {
+        throw new MacroError('argument 2 must be ObjectExpression');
+      }
+
+      const node = path2.node.properties.find((node) => node.key.name === 'ns');
+
+      if (!node) {
+        throw new MacroError('namespace not specified');
+      }
+
+      if (node.value.type !== 'StringLiteral') {
+        throw new MacroError('namespace must be StringLiteral');
+      }
+
+      path1.parentPath.replaceWith(babel.types.stringLiteral(`${node.value.value}::${path1.node.value}`));
+    } else {
+      path1.parentPath.replaceWith(babel.types.stringLiteral(path1.node.value));
     }
-
-    const node = path2.node.properties.find((node) => node.key.name === 'ns');
-
-    if (!node) {
-      throw new MacroError('namespace not specified');
-    }
-
-    if (node.value.type !== 'StringLiteral') {
-      throw new MacroError('namespace must be StringLiteral');
-    }
-
-    path1.parentPath.replaceWith(babel.types.stringLiteral(`${node.value.value}::${path1.node.value}`));
   });
 }
 
